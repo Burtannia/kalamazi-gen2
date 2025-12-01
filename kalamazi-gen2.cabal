@@ -1,0 +1,67 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.36.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           kalamazi-gen2
+version:        0.1.0.0
+synopsis:       A Haskell project
+description:    See https://hackage.haskell.org/package/kalamazi-gen2/docs/Kalamazi-Gen2.html
+author:         James Burton
+maintainer:     James Burton
+copyright:      2025 James Burton
+license:        BSD-2-Clause-Patent
+license-file:   LICENSE
+build-type:     Simple
+
+library
+  exposed-modules:
+      KalamaziGen2
+      Model
+  other-modules:
+      Paths_kalamazi_gen2
+  autogen-modules:
+      Paths_kalamazi_gen2
+  hs-source-dirs:
+      lib
+  ghc-options: -Wall
+  build-depends:
+      base ==4.*
+    , containers
+    , text
+    , time
+  default-language: GHC2024
+
+executable kalamazi-gen2
+  main-is: Main.hs
+  other-modules:
+      Paths_kalamazi_gen2
+  autogen-modules:
+      Paths_kalamazi_gen2
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base ==4.*
+    , kalamazi-gen2
+  default-language: GHC2024
+
+test-suite kalamazi-gen2-test
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      KalamaziGen2.Test.NameTest
+      Paths_kalamazi_gen2
+  autogen-modules:
+      Paths_kalamazi_gen2
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base ==4.*
+    , hedgehog >=1.1 && <1.5
+    , kalamazi-gen2
+    , tasty ==1.4.*
+    , tasty-hedgehog >=1.3 && <1.5
+  default-language: GHC2024
