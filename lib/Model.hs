@@ -10,6 +10,7 @@ data GuideMetadata = GuideMetadata
     , created :: UTCTime
     , edited :: UTCTime
     , description :: Maybe Text
+    , video :: Maybe URI
     , tags :: [Text]
     }
 -- TODO: We might also want to give special treatment to the video
@@ -19,6 +20,12 @@ data GuideMetadata = GuideMetadata
 
 -- TODO: What's the difference between a Section
 -- and a higher-order component?
+--
+-- Answer: Sections have a title and description,
+-- higher-order components, such as a grid, do not.
+-- With that said, a Grid will have metadata such
+-- as dimensions, so perhaps this is no different
+-- from a Section having a title/description?
 data Section = Section
     { title :: Text
     , description :: Maybe Text
@@ -45,7 +52,6 @@ data Component
     -- 1) Click "add wowhead link"
     -- 2) Type to search wowhead entity
     -- 3) Click the result to generate a linked piece of text
-    | ImportBox ImportBoxDetails -- for copying macros etc.
     | YoutubeEmbed YoutubeEmbedDetails
     | TwitchEmbed TwitchEmbedDetails
     | AbilityRotation AbilityRotationDetails
@@ -53,6 +59,18 @@ data Component
     | Gear GearDetails -- what does this do???
     | StatWeights StatWeightsDetails -- auto-include the caveat of simming
     | Consumables ConsumablesDetails -- is this just an ImageSwitch? What about enchants/gems?
+    | Profile ProfileDetails
+
+-----------------------
+-- Image sources
+-----------------------
+-- Uploaded e.g. a screenshot
+-- these will most likely be placed in Image components
+-- as a standalone item on the page.
+--
+-- Icons fetched from Wowhead or Blizzard API
+-- we will then "download" them behind the scenes.
+-- Likely used for image toggles such as trinkets.
 
 -- TODO: How do we handle rows/columns/grids?
 -- Perhaps more complex layouts like that should
