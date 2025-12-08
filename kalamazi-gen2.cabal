@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.36.1.
+-- This file has been generated from package.yaml by hpack version 0.38.2.
 --
 -- see: https://github.com/sol/hpack
 
@@ -25,10 +25,31 @@ library
       Paths_kalamazi_gen2
   hs-source-dirs:
       lib
-  ghc-options: -Wall
+  default-extensions:
+      BlockArguments
+      DataKinds
+      DefaultSignatures
+      DeriveAnyClass
+      DerivingStrategies
+      DuplicateRecordFields
+      FunctionalDependencies
+      GADTs
+      ImportQualifiedPost
+      LambdaCase
+      MultiWayIf
+      OverloadedRecordDot
+      OverloadedStrings
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      TemplateHaskell
+      TypeFamilies
+      TypeFamilyDependencies
+  ghc-options: -fhide-source-paths -Wall -Wcompat -Widentities -Wredundant-constraints -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies -Wunused-packages -Winvalid-haddock -Wredundant-bang-patterns -Woperator-whitespace -Wredundant-strictness-flags -O2
   build-depends:
       base ==4.*
     , containers
+    , network-uri
     , text
     , time
   default-language: GHC2024
@@ -41,7 +62,27 @@ executable kalamazi-gen2
       Paths_kalamazi_gen2
   hs-source-dirs:
       app
-  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-extensions:
+      BlockArguments
+      DataKinds
+      DefaultSignatures
+      DeriveAnyClass
+      DerivingStrategies
+      DuplicateRecordFields
+      FunctionalDependencies
+      GADTs
+      ImportQualifiedPost
+      LambdaCase
+      MultiWayIf
+      OverloadedRecordDot
+      OverloadedStrings
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      TemplateHaskell
+      TypeFamilies
+      TypeFamilyDependencies
+  ghc-options: -fhide-source-paths -Wall -Wcompat -Widentities -Wredundant-constraints -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies -Wunused-packages -Winvalid-haddock -Wredundant-bang-patterns -Woperator-whitespace -Wredundant-strictness-flags -O2 -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base ==4.*
     , kalamazi-gen2
@@ -57,7 +98,27 @@ test-suite kalamazi-gen2-test
       Paths_kalamazi_gen2
   hs-source-dirs:
       test
-  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-extensions:
+      BlockArguments
+      DataKinds
+      DefaultSignatures
+      DeriveAnyClass
+      DerivingStrategies
+      DuplicateRecordFields
+      FunctionalDependencies
+      GADTs
+      ImportQualifiedPost
+      LambdaCase
+      MultiWayIf
+      OverloadedRecordDot
+      OverloadedStrings
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      TemplateHaskell
+      TypeFamilies
+      TypeFamilyDependencies
+  ghc-options: -fhide-source-paths -Wall -Wcompat -Widentities -Wredundant-constraints -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies -Wunused-packages -Winvalid-haddock -Wredundant-bang-patterns -Woperator-whitespace -Wredundant-strictness-flags -O2 -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base ==4.*
     , hedgehog >=1.1 && <1.5

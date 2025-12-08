@@ -1,18 +1,23 @@
 module Model where
 
+import Data.Text (Text)
+import Data.Time (UTCTime)
+import Network.URI (URI)
+
 data Guide = Guide
-    { metadata :: GuideMetadata
-    , sections :: [Section]
-    }
+  { metadata :: GuideMetadata
+  , sections :: [Section]
+  }
 
 data GuideMetadata = GuideMetadata
-    { title :: Text
-    , created :: UTCTime
-    , edited :: UTCTime
-    , description :: Maybe Text
-    , video :: Maybe URI
-    , tags :: [Text]
-    }
+  { title :: Text
+  , created :: UTCTime
+  , edited :: UTCTime
+  , description :: Maybe Text
+  , video :: Maybe URI
+  , tags :: [Text]
+  }
+
 -- TODO: We might also want to give special treatment to the video
 -- guide associated with the given class or raid.
 -- Maybe highlight that as a special part of the dropdown
@@ -27,10 +32,80 @@ data GuideMetadata = GuideMetadata
 -- as dimensions, so perhaps this is no different
 -- from a Section having a title/description?
 data Section = Section
-    { title :: Text
-    , description :: Maybe Text
-    , components :: [Component]
-    }
+  { title :: Text
+  , description :: Maybe Text
+  , components :: [Component]
+  }
+
+-----------------------
+-- Image sources
+-----------------------
+-- Uploaded e.g. a screenshot
+-- these will most likely be placed in Image components
+-- as a standalone item on the page.
+--
+-- Icons fetched from Wowhead or Blizzard API
+-- we will then "download" them behind the scenes.
+-- Likely used for image toggles such as trinkets.
+data ImageSource = Local Text | Remote URI
+
+data ImageSwitchDetails = ImageSwitchDetails
+  {
+  }
+
+data ImageDetails = ImageDetails
+  { source :: ImageSource
+  }
+
+data ParagraphDetails = ParagraphDetails
+  { contents :: Text
+  }
+
+data YoutubeEmbedDetails = YoutubeEmbedDetails
+  { source :: URI
+  }
+
+data TwitchEmbedDetails = TwitchEmbedDetails
+  { source :: URI
+  }
+
+data AbilityRotationDetails = AbilityRotationDetails
+  {
+  }
+
+data TierSetDetails = TierSetDetails
+  {
+  }
+
+data GearDetails = GearDetails
+  {
+  }
+
+data Stat
+  = Intellect
+  | Haste
+  | CriticalStrike
+  | Mastery
+  | Versatility
+
+data StatComp
+  = StatGreater
+  | StatEqual
+  | StatGreaterEqual
+
+data StatWeightsDetails = StatWeightsDetails
+  { stats :: [Stat]
+  , comps :: [StatComp]
+  }
+
+data ConsumablesDetails = ConsumablesDetails
+  {
+  }
+
+data ProfileDetails = ProfileDetails
+  { label :: Text
+  , copyString :: Text
+  }
 
 -- TODO: Perhaps these should be more
 -- domain specific and generic things
@@ -44,37 +119,30 @@ data Section = Section
 -- Perhaps we commit to wiping guides between
 -- expansions?
 data Component
-    = TextSwitch TextSwitchDetails
-    | ImageSwitch ImageSwitchDetails
-    | Image ImageDetails
-    | Paragraph ParagraphDetails -- TODO: Within a paragraph, we will want to support linking item names etc. to Wowhead so that the tooltips will work.
-    -- Is there an API from Wowhead that we can use to create a flow such as:
-    -- 1) Click "add wowhead link"
-    -- 2) Type to search wowhead entity
-    -- 3) Click the result to generate a linked piece of text
-    | YoutubeEmbed YoutubeEmbedDetails
-    | TwitchEmbed TwitchEmbedDetails
-    | AbilityRotation AbilityRotationDetails
-    | TierSet TierSetDetails -- do we need this???
-    | Gear GearDetails -- what does this do???
-    | StatWeights StatWeightsDetails -- auto-include the caveat of simming
-    | Consumables ConsumablesDetails -- is this just an ImageSwitch? What about enchants/gems?
-    | Profile ProfileDetails
-
------------------------
--- Image sources
------------------------
--- Uploaded e.g. a screenshot
--- these will most likely be placed in Image components
--- as a standalone item on the page.
---
--- Icons fetched from Wowhead or Blizzard API
--- we will then "download" them behind the scenes.
--- Likely used for image toggles such as trinkets.
+  = TextSwitch TextSwitchDetails
+  | ImageSwitch ImageSwitchDetails
+  | ImageEmbed ImageDetails
+  | Paragraph ParagraphDetails -- TODO: Within a paragraph, we will want to support linking item names etc. to Wowhead so that the tooltips will work.
+  -- Is there an API from Wowhead that we can use to create a flow such as:
+  -- 1) Click "add wowhead link"
+  -- 2) Type to search wowhead entity
+  -- 3) Click the result to generate a linked piece of text
+  | YoutubeEmbed YoutubeEmbedDetails
+  | TwitchEmbed TwitchEmbedDetails
+  | AbilityRotation AbilityRotationDetails
+  | TierSet TierSetDetails -- do we need this???
+  | Gear GearDetails -- what does this do???
+  | StatWeights StatWeightsDetails -- auto-include the caveat of simming
+  | Consumables ConsumablesDetails -- is this just an ImageSwitch? What about enchants/gems?
+  | Profile ProfileDetails
 
 -- TODO: How do we handle rows/columns/grids?
 -- Perhaps more complex layouts like that should
 -- just be hard-coded into the guide layout?
+
+data TextSwitchItem = TextSwitchItem
+  {
+  }
 
 -- This is a good example of a domain-level component
 -- vs a low-level component. A TextSwitch is a low-level
@@ -85,13 +153,8 @@ data Component
 -- from havint something else such as a an image or even
 -- another switch component.
 data TextSwitchDetails = TextSwitchDetails
-    { items :: [(Text, _)]
-    }
-
--- TODO: What is an Image?
-data ImageSwitchDetails = ImageSwitchDetails
-    { items :: [(Image, _)]
-    }
+  { items :: [TextSwitchItem]
+  }
 
 -- TODO: Do we need to discriminate between
 -- Wowhead items that have thumbnails and those
@@ -121,6 +184,6 @@ data ImageSwitchDetails = ImageSwitchDetails
 --  - Remove the span child
 --  - Remove the background image
 --  - Re-add the img child
-data WowheadItem = _
+data WowheadItem = WowheadItem
 
 -- TODO: How do we want to handle the variants of each spec e.g. Hellcaller vs Diabolist?
