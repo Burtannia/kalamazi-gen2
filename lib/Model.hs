@@ -9,6 +9,33 @@ data Guide = Guide
   , sections :: [Section]
   }
 
+-- Can create an overview/cheatsheet like Wowhead.
+-- This is an interesting concept because it nudges
+-- us towards defining data in terms of game domain terms
+-- like "consumable" rather than web domain terms such
+-- as "toggle component".
+--
+-- We can then reuse this data, such as a list of consumables,
+-- for as many components as we'd like such as a table of
+-- consumables, a cheatsheet etc. This does reduce flexibility
+-- compared to a completely generic component based approach,
+-- but arguably makes it much easier for the user.
+--
+-- That said, we could still have the components such as
+-- cheatsheet and "consumables table" define their own
+-- set of consumables, this might be useful, e.g. if the
+-- cheatsheet version should be abridged. On the other hand
+-- this also creates more work for the user.
+--
+-- My main concern right now in designing this data model
+-- is whether or not we can realistically define various
+-- properties at the guide level. For example, one may think
+-- that we define "stat weights" once per guide. But will there
+-- ever be a scenario where it varies between hero talents?
+-- What about between mythic+ and raid?
+-- Some guides such as the "raid" guide just seem to list
+-- talent builds so wouldn't have a "stat weights" at all.
+
 data GuideMetadata = GuideMetadata
   { title :: Text
   , created :: UTCTime

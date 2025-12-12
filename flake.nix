@@ -89,6 +89,8 @@
             "text"
             "time"
             "network-uri"
+            "uuid"
+            "aeson"
           ];
         };
 

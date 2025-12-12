@@ -10,6 +10,16 @@
   (major1) == 0 && (major2) <  1 || \
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_kalamazi_gen2 */
+/* package aeson-2.2.3.0 */
+#ifndef VERSION_aeson
+#define VERSION_aeson "2.2.3.0"
+#endif /* VERSION_aeson */
+#ifndef MIN_VERSION_aeson
+#define MIN_VERSION_aeson(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  2 || \
+  (major1) == 2 && (major2) == 2 && (minor) <= 3)
+#endif /* MIN_VERSION_aeson */
 /* package base-4.21.0.0 */
 #ifndef VERSION_base
 #define VERSION_base "4.21.0.0"
@@ -60,6 +70,16 @@
   (major1) == 1 && (major2) <  14 || \
   (major1) == 1 && (major2) == 14 && (minor) <= 0)
 #endif /* MIN_VERSION_time */
+/* package uuid-1.3.16 */
+#ifndef VERSION_uuid
+#define VERSION_uuid "1.3.16"
+#endif /* VERSION_uuid */
+#ifndef MIN_VERSION_uuid
+#define MIN_VERSION_uuid(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  3 || \
+  (major1) == 1 && (major2) == 3 && (minor) <= 16)
+#endif /* MIN_VERSION_uuid */
 
 /* tool cpphs-1.20.9 */
 #ifndef TOOL_VERSION_cpphs
